@@ -1,0 +1,29 @@
+{
+  "name": "@wickpics/onchain-safety-mcp",
+  "version": "0.1.0",
+  "description": "MCP server: multi-chain ERC-20 token-safety checker (rug / honeypot / LP-burn verdicts) for PulseChain, Monad, Base, and BSC — powered by onchain.wick.pics",
+  "bin": { "onchain-safety-mcp": "index.js" },
+  "main": "index.js",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aitools420/onchain-safety-mcp.git"
+  },
+  "keywords": [
+    "mcp",
+    "modelcontextprotocol",
+    "token-safety",
+    "rug-check",
+    "honeypot",
+    "crypto",
+    "pulsechain",
+    "monad",
+    "base",
+    "x402"
+  ],
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "zod": "^4.4.3"
+  },
+  "mcpName": "io.github.aitools420/onchain-safety-mcp"
+}
