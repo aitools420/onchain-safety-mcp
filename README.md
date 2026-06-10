@@ -1,22 +1,25 @@
 # onchain-safety-mcp
 
-MCP (Model Context Protocol) server that gives any AI agent a **token-safety check** tool:
-a scam/safe verdict for ERC-20 tokens on **PulseChain, Monad, Base, and BSC**.
+MCP (Model Context Protocol) server that gives any AI agent **crypto token-safety and
+alpha-discovery tools** on **PulseChain, Monad, Base, and BSC**.
 
 It is a thin stdio client over the hosted API at [onchain.wick.pics](https://onchain.wick.pics)
 (engine `wick-safe/0.3`): contract risk, liquidity depth, honeypot transfer-simulation, and
-LP-burn checks, condensed into one verdict.
+LP-burn checks, plus live signal feeds produced by an on-chain monitoring fleet.
 
-## Tool
+## Tools
 
-`check_token_safety({ chain, address })`
+| tool | what it answers |
+|---|---|
+| `check_token_safety({ chain, address })` | Is this token a scam? Verdict (`SAFE` … `LIKELY_RUG`), 0–100 score, evidence checks. |
+| `fresh_rug_radar()` | What just launched, and is it safe? Last 20 freshly-created pools, safety-scored at creation. |
+| `exit_safety({ chain, token, sizeUsd, maxSlippage? })` | Could I sell $X of this at acceptable slippage? Size-aware price impact + safety verdict. |
+| `smart_money_signals()` | What are alpha-wallet clusters co-buying right now (safety-gated, confidence-scored)? |
+| `what_ticker()` | The single top-ranked safe token alpha wallets are buying — with the why and alternates. |
 
-- `chain`: `pulsechain` | `monad` | `base` | `bsc`
-- `address`: the token contract address (`0x…`)
-
-Returns: `verdict` (`SAFE` / `LOW_RISK` / `CAUTION` / `HIGH_RISK` / `LIKELY_RUG` /
-`NOT_A_TOKEN` / `UNKNOWN`), a 0–100 score, confidence, and the evidence checks.
-Agents should call it before interacting with, buying, or accepting an unknown token.
+`chain`: `pulsechain` | `monad` | `base` | `bsc` · token/address: `0x…` contract address.
+Agents should call `check_token_safety` / `exit_safety` before interacting with, buying, or
+accepting an unknown token.
 
 ## Install (any MCP client — Claude Desktop, agent frameworks)
 

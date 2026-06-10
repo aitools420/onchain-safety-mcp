@@ -1,7 +1,7 @@
 {
   "name": "@wickpics/onchain-safety-mcp",
-  "version": "0.1.0",
-  "description": "MCP server: multi-chain ERC-20 token-safety checker (rug / honeypot / LP-burn verdicts) for PulseChain, Monad, Base, and BSC — powered by onchain.wick.pics",
+  "version": "0.2.0",
+  "description": "MCP server for crypto agents: token-safety verdicts, fresh-pool rug radar, exit-safety/liquidity-depth, smart-money signals, and top-pick discovery on PulseChain, Monad, Base, and BSC — powered by onchain.wick.pics",
   "bin": { "onchain-safety-mcp": "index.js" },
   "main": "index.js",
   "license": "MIT",
