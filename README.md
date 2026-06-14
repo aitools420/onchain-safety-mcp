@@ -14,6 +14,9 @@ LP-burn checks, plus live signal feeds produced by an on-chain monitoring fleet.
 | `check_token_safety({ chain, address })` | Is this token a scam? Verdict (`SAFE` … `LIKELY_RUG`), 0–100 score, evidence checks. |
 | `fresh_rug_radar()` | What just launched, and is it safe? Last 20 freshly-created pools, safety-scored at creation. |
 | `exit_safety({ chain, token, sizeUsd, maxSlippage? })` | Could I sell $X of this at acceptable slippage? Size-aware price impact + safety verdict. |
+| `check_ownership({ chain, address })` | Is ownership renounced / upgradeable, and what can an active owner still do (mint, blacklist, pause, tax)? |
+| `safe_to_interact({ chain, address })` | One call → SAFE_TO_INTERACT / CAUTION / DO_NOT_INTERACT, bundling safety + ownership, with reasons. |
+| `wallet_approvals({ chain, owner })` | A wallet's active ERC-20 approvals, flagging unlimited grants — the drainer vector. |
 
 `chain`: `pulsechain` | `monad` | `base` | `bsc` · token/address: `0x…` contract address.
 Agents should call `check_token_safety` / `exit_safety` before interacting with, buying, or

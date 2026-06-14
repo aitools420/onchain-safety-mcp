@@ -69,6 +69,45 @@ server.registerTool(
   ),
 );
 
+server.registerTool(
+  'check_ownership',
+  {
+    title: 'Ownership / renounce + privileges',
+    description: 'Is ownership renounced, is the contract upgradeable (proxy), and what powers can an active owner still use (mint / blacklist / pause / adjust tax)? Deterministic on-chain read — call before trusting a token long-term.',
+    inputSchema: {
+      chain: z.enum(['pulsechain', 'monad', 'base', 'bsc']).describe('chain the token is on'),
+      address: z.string().regex(/^0x[a-fA-F0-9]{40}$/).describe('the token contract address (0x…)'),
+    },
+  },
+  ({ chain, address }) => apiGet(`/api/v1/ownership?chain=${encodeURIComponent(chain)}&address=${encodeURIComponent(address)}`),
+);
+
+server.registerTool(
+  'safe_to_interact',
+  {
+    title: 'Safe to interact? (composite)',
+    description: 'One call before touching a contract: bundles the safety verdict + ownership/privileges into a single recommendation — SAFE_TO_INTERACT / CAUTION / DO_NOT_INTERACT — with reasons. The de-risked "should I touch this?" answer for an agent mid-execution.',
+    inputSchema: {
+      chain: z.enum(['pulsechain', 'monad', 'base', 'bsc']).describe('chain the token/contract is on'),
+      address: z.string().regex(/^0x[a-fA-F0-9]{40}$/).describe('the contract/token address (0x…)'),
+    },
+  },
+  ({ chain, address }) => apiGet(`/api/v1/safe-to-interact?chain=${encodeURIComponent(chain)}&address=${encodeURIComponent(address)}`),
+);
+
+server.registerTool(
+  'wallet_approvals',
+  {
+    title: 'Wallet approval scanner',
+    description: 'Enumerate a wallet\'s active ERC-20 approvals (allowances granted to spender contracts) and flag the unlimited ones — the classic wallet-drainer vector. Call to audit what could quietly drain a wallet. Scans a recent block window.',
+    inputSchema: {
+      chain: z.enum(['pulsechain', 'monad', 'base', 'bsc']).describe('chain the wallet is on'),
+      owner: z.string().regex(/^0x[a-fA-F0-9]{40}$/).describe('the wallet address to scan (0x…)'),
+    },
+  },
+  ({ chain, owner }) => apiGet(`/api/v1/approvals?chain=${encodeURIComponent(chain)}&owner=${encodeURIComponent(owner)}`),
+);
+
 server.connect(new StdioServerTransport())
-  .then(() => console.error(`[onchain-safety-mcp] ready — 3 tools: check_token_safety, fresh_rug_radar, exit_safety (api=${API_BASE}, key=${API_KEY ? 'set' : 'none'})`))
+  .then(() => console.error(`[onchain-safety-mcp] ready — 6 tools: check_token_safety, fresh_rug_radar, exit_safety, check_ownership, safe_to_interact, wallet_approvals (api=${API_BASE}, key=${API_KEY ? 'set' : 'none'})`))
   .catch((e) => { console.error('[onchain-safety-mcp] failed:', e.message); process.exit(1); });
