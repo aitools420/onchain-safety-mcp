@@ -1,0 +1,21 @@
+# Smithery deployment config — https://smithery.ai
+# stdio MCP server; ONCHAIN_API_KEY is optional (free rate-limited tier without it,
+# paid deep tier with a wsk_ key from https://onchain.wick.pics).
+startCommand:
+  type: stdio
+  configSchema:
+    type: object
+    properties:
+      onchainApiKey:
+        type: string
+        title: Onchain API key
+        description: "Optional wsk_ key for the paid deep tier (omit for the free rate-limited tier). Get one at https://onchain.wick.pics"
+    required: []
+  commandFunction: |
+    (config) => ({
+      command: 'node',
+      args: ['index.js'],
+      env: config.onchainApiKey ? { ONCHAIN_API_KEY: config.onchainApiKey } : {}
+    })
+  exampleConfig:
+    onchainApiKey: ""
