@@ -1,11 +1,15 @@
 # onchain-safety-mcp
 
-MCP (Model Context Protocol) server that gives any AI agent **crypto token-safety and
-alpha-discovery tools** on **PulseChain, Monad, Base, and BSC**.
+MCP (Model Context Protocol) server that gives any AI agent **on-chain token-safety tools**
+for **PulseChain, Monad, Base, and BSC** — including the long-tail chains that the big safety
+APIs (GoPlus, De.Fi, Honeypot.is) cover poorly or not at all.
 
 It is a thin stdio client over the hosted API at [onchain.wick.pics](https://onchain.wick.pics)
-(engine `wick-safe/0.3`): contract risk, liquidity depth, honeypot transfer-simulation, and
-LP-burn checks, plus live signal feeds produced by an on-chain monitoring fleet.
+(engine `wick-safe/0.3`). Every check is **deterministic on-chain analysis — no LLM in the
+verdict path**, so results are fast, cheap, and reproducible: contract-risk heuristics,
+liquidity depth, honeypot transfer-simulation, LP-burn, ownership/renounce + privilege
+detection, upgradeable-proxy detection, and a wallet approval (drainer) scanner. The free tier
+needs no key. *Informational, not financial advice.*
 
 ## Tools
 
