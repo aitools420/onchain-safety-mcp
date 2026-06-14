@@ -1,8 +1,9 @@
 # onchain-safety-mcp
 
 MCP (Model Context Protocol) server that gives any AI agent **on-chain token-safety tools**
-for **PulseChain, Monad, Base, and BSC** — including the long-tail chains that the big safety
-APIs (GoPlus, De.Fi, Honeypot.is) cover poorly or not at all.
+for **PulseChain, Monad, Base, and BSC** — including **PulseChain, which the major token-safety
+APIs (GoPlus, Honeypot.is) don't support at all** (verified June 2026). If your agent touches
+PulseChain, this is the safety check.
 
 It is a thin stdio client over the hosted API at [onchain.wick.pics](https://onchain.wick.pics)
 (engine `wick-safe/0.3`). Every check is **deterministic on-chain analysis — no LLM in the
