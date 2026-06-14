@@ -108,6 +108,19 @@ server.registerTool(
   ({ chain, owner }) => apiGet(`/api/v1/approvals?chain=${encodeURIComponent(chain)}&owner=${encodeURIComponent(owner)}`),
 );
 
+server.registerTool(
+  'wallet_poison_check',
+  {
+    title: 'Address-poisoning scanner',
+    description: 'Scan a wallet\'s recent incoming transfers for address-poisoning attacks — dust/zero-value transfers from lookalike addresses (first-4+last-4 chars matching a real counterparty the wallet has paid) seeded to trick a copy-paste of the wrong address. Call before sending to a "recently used" address to avoid pasting a poisoned lookalike.',
+    inputSchema: {
+      chain: z.enum(['pulsechain', 'monad', 'base', 'bsc']).describe('chain the wallet is on'),
+      owner: z.string().regex(/^0x[a-fA-F0-9]{40}$/).describe('the wallet address to scan (0x…)'),
+    },
+  },
+  ({ chain, owner }) => apiGet(`/api/v1/poison-check?chain=${encodeURIComponent(chain)}&owner=${encodeURIComponent(owner)}`),
+);
+
 server.connect(new StdioServerTransport())
-  .then(() => console.error(`[onchain-safety-mcp] ready — 6 tools: check_token_safety, fresh_rug_radar, exit_safety, check_ownership, safe_to_interact, wallet_approvals (api=${API_BASE}, key=${API_KEY ? 'set' : 'none'})`))
+  .then(() => console.error(`[onchain-safety-mcp] ready — 7 tools: check_token_safety, fresh_rug_radar, exit_safety, check_ownership, safe_to_interact, wallet_approvals, wallet_poison_check (api=${API_BASE}, key=${API_KEY ? 'set' : 'none'})`))
   .catch((e) => { console.error('[onchain-safety-mcp] failed:', e.message); process.exit(1); });
