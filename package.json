@@ -1,7 +1,7 @@
 {
   "name": "@wickpics/onchain-safety-mcp",
   "version": "0.2.0",
-  "description": "MCP server for crypto agents: token-safety verdicts, fresh-pool rug radar, exit-safety/liquidity-depth, smart-money signals, and top-pick discovery on PulseChain, Monad, Base, and BSC — powered by onchain.wick.pics",
+  "description": "MCP server for crypto agents: multi-chain token-SAFETY — rug/honeypot verdicts (0-100 score + evidence), fresh-pool rug radar, and size-aware exit-safety on PulseChain, Monad, Base, and BSC. Powered by onchain.wick.pics. Informational, not financial advice.",
   "bin": { "onchain-safety-mcp": "index.js" },
   "main": "index.js",
   "license": "MIT",

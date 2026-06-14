@@ -69,26 +69,6 @@ server.registerTool(
   ),
 );
 
-server.registerTool(
-  'smart_money_signals',
-  {
-    title: 'Safe smart-money signals',
-    description: 'Tokens that multiple alpha-wallet funding clusters co-bought recently AND that pass the safety engine — a de-rugged Monad smart-money feed with per-signal confidence scores and cohort composition. Free tier is delayed ~30 min; a paid key unlocks the real-time feed.',
-    inputSchema: {},
-  },
-  () => apiGet('/api/v1/smart-money/recent'),
-);
-
-server.registerTool(
-  'what_ticker',
-  {
-    title: 'WHAT TICKER? — top alpha pick',
-    description: 'The single highest-ranked token that alpha-wallet clusters are buying right now AND that passes the safety gate, with the reasoning and alternates. The de-rugged "what should I look at" answer. Returns pick:null when nothing clears both bars — that is signal too.',
-    inputSchema: {},
-  },
-  () => apiGet('/api/v1/what-ticker'),
-);
-
 server.connect(new StdioServerTransport())
-  .then(() => console.error(`[onchain-safety-mcp] ready — 5 tools: check_token_safety, fresh_rug_radar, exit_safety, smart_money_signals, what_ticker (api=${API_BASE}, key=${API_KEY ? 'set' : 'none'})`))
+  .then(() => console.error(`[onchain-safety-mcp] ready — 3 tools: check_token_safety, fresh_rug_radar, exit_safety (api=${API_BASE}, key=${API_KEY ? 'set' : 'none'})`))
   .catch((e) => { console.error('[onchain-safety-mcp] failed:', e.message); process.exit(1); });
