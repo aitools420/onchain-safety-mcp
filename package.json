@@ -25,5 +25,8 @@
     "@modelcontextprotocol/sdk": "^1.29.0",
     "zod": "^4.4.3"
   },
+  "engines": { "node": ">=18" },
+  "files": ["index.js"],
+  "publishConfig": { "access": "public" },
   "mcpName": "io.github.aitools420/onchain-safety-mcp"
 }
