@@ -22,6 +22,7 @@ needs no key. *Informational, not financial advice.*
 | `check_ownership({ chain, address })` | Is ownership renounced / upgradeable, and what can an active owner still do (mint, blacklist, pause, tax)? |
 | `safe_to_interact({ chain, address })` | One call → SAFE_TO_INTERACT / CAUTION / DO_NOT_INTERACT, bundling safety + ownership, with reasons. |
 | `wallet_approvals({ chain, owner })` | A wallet's active ERC-20 approvals, flagging unlimited grants — the drainer vector. |
+| `wallet_poison_check({ chain, owner })` | Address-poisoning scan: dust/look-alike transfers in a wallet's history that mimic a real counterparty to trick a paste-and-send of the wrong address. |
 
 `chain`: `pulsechain` | `monad` | `base` | `bsc` · token/address: `0x…` contract address.
 Agents should call `check_token_safety` / `exit_safety` before interacting with, buying, or
