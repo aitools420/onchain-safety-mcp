@@ -1,7 +1,7 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.aitools420/onchain-safety-mcp",
-  "description": "Multi-chain token-SAFETY for AI agents on PulseChain, Monad, Base & BSC: rug/honeypot verdict + 0-100 score + evidence, ownership/renounce + privilege checks, a safe-to-interact composite, size-aware exit-liquidity, and a wallet approval (drainer) scanner. Deterministic, no AI. Free tier needs no key; x402 pay-per-call.",
+  "description": "Token-safety for AI agents: rug/honeypot verdict + score across PulseChain, Monad, Base & BSC",
   "version": "0.2.0",
   "repository": {
     "url": "https://github.com/aitools420/onchain-safety-mcp",
@@ -12,7 +12,9 @@
       "registryType": "npm",
       "identifier": "@wickpics/onchain-safety-mcp",
       "version": "0.2.0",
-      "transport": { "type": "stdio" },
+      "transport": {
+        "type": "stdio"
+      },
       "environmentVariables": [
         {
           "name": "ONCHAIN_API_KEY",
